@@ -16,7 +16,12 @@ public class Etal {
 	public Gaulois getVendeur() {
 		return vendeur;
 	}
-
+		
+		
+	public int getQuantiteDebMarche() {
+		return quantiteDebutMarche;
+	}
+	
 	public int getQuantite() {
 		return quantite;
 	}

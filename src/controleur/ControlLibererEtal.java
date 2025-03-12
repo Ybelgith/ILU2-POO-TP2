@@ -1,5 +1,7 @@
 package controleur;
 
+import villagegaulois.Etal;
+
 public class ControlLibererEtal {
 	private ControlTrouverEtalVendeur controlTrouverEtalVendeur;
 
@@ -22,8 +24,24 @@ public class ControlLibererEtal {
 	 */
 	public String[] libererEtal(String nomVendeur) {
 		//TODO a completer
+		Etal etal = controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur);
+		if(etal != null && etal.isEtalOccupe()) {
 		String[] donneesEtal = null;
-		return donneesEtal;
-	}
+	
+		
+		donneesEtal[0] = "true";
+		donneesEtal[1] = nomVendeur;
+		donneesEtal[2] = etal.getProduit();
+		donneesEtal[3] = String.valueOf(etal.getQuantite());
+		donneesEtal[4] = String.valueOf(etal.getQuantiteDebMarche() - etal.getQuantite());
 
-}
+		// Libérer l’étal
+		etal.libererEtal();
+
+		return donneesEtal;
+		} else {
+		// Retourne un tableau indiquant que l'étal n'était pas occupé
+		return new String[]{"false"};
+				}
+			}
+	}
