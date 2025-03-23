@@ -1,30 +1,31 @@
+//ControlPrendreEtal.java
 package controleur;
 
+import personnages.Gaulois;
 import villagegaulois.Village;
 
 public class ControlPrendreEtal {
 	private Village village;
 	private ControlVerifierIdentite controlVerifierIdentite;
 
-	public ControlPrendreEtal(ControlVerifierIdentite controlVerifierIdentite,
-			Village village) {
-		this.controlVerifierIdentite = controlVerifierIdentite;
+	public ControlPrendreEtal(ControlVerifierIdentite controlVerifierIdentite, Village village) {
 		this.village = village;
+		this.controlVerifierIdentite = controlVerifierIdentite;
 	}
 
 	public boolean resteEtals() {
-		//TODO a completer, attention le retour ne dit pas etre false :-)
-		return false;
+		return village.rechercherEtalVide();
 	}
 
 	public int prendreEtal(String nomVendeur, String produit, int nbProduit) {
-		//TODO a completer
-		int numeroEtal = -1;
-		return numeroEtal;
+		Gaulois vendeur = village.trouverHabitant(nomVendeur);
+		if (vendeur != null && resteEtals()) {
+			return village.installerVendeur(vendeur, produit, nbProduit);
+		}
+		return -1;
 	}
 
 	public boolean verifierIdentite(String nomVendeur) {
-		//TODO a completer, attention le retour ne dit pas etre false :-)
-		return false;
+		return controlVerifierIdentite.verifierIdentite(nomVendeur);
 	}
 }
