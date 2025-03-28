@@ -1,39 +1,39 @@
 package frontiere;
 
 import controleur.ControlPrendreEtal;
-import frontiere.Clavier;
 
 public class BoundaryPrendreEtal {
 	private ControlPrendreEtal controlPrendreEtal;
 
-	public BoundaryPrendreEtal(ControlPrendreEtal controlChercherEtal) {
-		this.controlPrendreEtal = controlChercherEtal;
+	public BoundaryPrendreEtal(ControlPrendreEtal controlPrendreEtal) {
+		this.controlPrendreEtal = controlPrendreEtal;
 	}
 
 	public void prendreEtal(String nomVendeur) {
 		if (!controlPrendreEtal.verifierIdentite(nomVendeur)) {
-			System.out.println("Vous devez être un villageois pour prendre un étal !");
+			System.out.println("Je suis désolé(e) " + nomVendeur
+					+ " mais il faut être un habitant de notre village pour commercer ici.");
 			return;
 		}
-
 		if (!controlPrendreEtal.resteEtals()) {
-			System.out.println("Désolé, il n'y a plus d'étal disponible au marché.");
+			System.out.println("Désolé, il n'y a plus d'étals disponibles.");
 			return;
 		}
-
 		installerVendeur(nomVendeur);
 	}
 
 	private void installerVendeur(String nomVendeur) {
-		String produit = Clavier.entrerChaine("Quel produit souhaitez-vous vendre ?");
-		int nbProduit = Clavier.entrerEntier("Combien souhaitez-vous en vendre ?");
+		System.out.println("C'est parfait, il me reste un étal pour vous.");
+		System.out.println("Quel produit souhaitez-vous vendre ?");
+		String produit = Clavier.entrerChaine("");
+		System.out.println("Combien souhaitez-vous en vendre ?");
+		int quantite = Clavier.entrerEntier("");
 
-		int numeroEtal = controlPrendreEtal.prendreEtal(nomVendeur, produit, nbProduit);
-
-		if (numeroEtal != -1) {
-			System.out.println("Le vendeur " + nomVendeur + " s'est installé avec succès à l'étal n°" + numeroEtal);
+		int numEtal = controlPrendreEtal.prendreEtal(nomVendeur, produit, quantite);
+		if (numEtal != -1) {
+			System.out.println("Le vendeur " + nomVendeur + " s'est installé à l'étal n°" + (numEtal + 1) + ".");
 		} else {
-			System.out.println("Une erreur est survenue, impossible de prendre l'étal.");
+			System.out.println("Erreur lors de l'installation du vendeur.");
 		}
 	}
 }

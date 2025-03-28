@@ -8,14 +8,15 @@ public class BoundaryLibererEtal {
 	public BoundaryLibererEtal(ControlLibererEtal controlLibererEtal) {
 		this.controlLibererEtal = controlLibererEtal;
 	}
-
+	
 	public void libererEtal(String nomVendeur) {
-		String[] donnees = controlLibererEtal.libererEtal(nomVendeur);
-		if (donnees[0].equals("true")) {
-			System.out.println("L'étal de " + donnees[1] + " est libéré. Produit : " + donnees[2] + ", vendu : "
-					+ donnees[4] + "/" + donnees[3]);
+		String[] donneesEtal = controlLibererEtal.libererEtal(nomVendeur);
+		if (donneesEtal == null) {
+			System.out.println("Mais vous n'êtes pas inscrit sur notre marché aujourd'hui !");
 		} else {
-			System.out.println("Vous n'avez aucun étal à libérer.");
+			System.out.println("Vous avez vendu " + donneesEtal[4] + " sur " + donneesEtal[3] + " " + donneesEtal[2] + ".");
+			System.out.println("Au revoir " + nomVendeur + ", passez une bonne journée.");
 		}
 	}
+	
 }

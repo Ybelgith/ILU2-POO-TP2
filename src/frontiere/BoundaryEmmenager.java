@@ -11,14 +11,13 @@ public class BoundaryEmmenager {
 
 	public void emmenager(String nomVisiteur) {
 		if (controlEmmenager.isHabitant(nomVisiteur)) {
-			System.out.println(
-					"Mais vous êtes déjà un habitant du village !");
+			System.out.println("Mais vous êtes déjà un habitant du village !");
 		} else {
 			StringBuilder question = new StringBuilder();
 			question.append("Êtes-vous :\n");
 			question.append("1 - un druide.\n");
 			question.append("2 - un gaulois.\n");
-			int choixUtilisateur = -1;
+			int choixUtilisateur;
 			do {
 				choixUtilisateur = Clavier.entrerEntier(question.toString());
 				switch (choixUtilisateur) {
@@ -27,14 +26,11 @@ public class BoundaryEmmenager {
 					break;
 
 				case 2:
-					//TODO a completer
 					emmenagerGaulois(nomVisiteur);
-					
 					break;
 
 				default:
-					System.out
-							.println("Vous devez choisir le chiffre 1 ou 2 !");
+					System.out.println("Vous devez choisir le chiffre 1 ou 2 !");
 					break;
 				}
 			} while (choixUtilisateur != 1 && choixUtilisateur != 2);
@@ -42,28 +38,23 @@ public class BoundaryEmmenager {
 	}
 
 	private void emmenagerDruide(String nomVisiteur) {
-		System.out.println("Bienvenue"+ nomVisiteur + "!");
-		int force = Clavier.entrerEntier("Quelle est votre force?");
-		int effetPotionMin  = Clavier.entrerEntier("Quel est l'effet min de votre potion magique?");
-		int effetPotionMax;
-		do {
-			effetPotionMax = Clavier.entrerEntier("Quelle est l'eefet max de votre potion magique?");
-			if(effetPotionMax < effetPotionMin) {
-				System.out.println("L'effet de votre potion max doit être > à l'effet min !");}
-		} while(effetPotionMax < effetPotionMin); 
-			
-			controlEmmenager.ajouterDruide(nomVisiteur, force, effetPotionMin, effetPotionMax);
-			System.out.println("Ajout de" + nomVisiteur + "!");
-				
+		System.out.println("Quelle est votre force ?");
+		int force = Clavier.entrerEntier("");
+		System.out.println("Quel est l'effet minimum de vos potions ?");
+		int effetMin = Clavier.entrerEntier("");
+		System.out.println("Quel est l'effet maximum de vos potions ?");
+		int effetMax = Clavier.entrerEntier("");
 		
+		controlEmmenager.ajouterDruide(nomVisiteur, force, effetMin, effetMax);
+		System.out.println("Le druide " + nomVisiteur + " a bien emménagé dans le village.");
 	}
+
 	private void emmenagerGaulois(String nomVisiteur) {
-		System.out.println("Bienvenue" + nomVisiteur +"!");
-		int force = Clavier.entrerEntier("Quelle est votre force?");
+		System.out.println("Quelle est votre force ?");
+		int force = Clavier.entrerEntier("");
+		
 		controlEmmenager.ajouterGaulois(nomVisiteur, force);
-		System.out.println("Ajout de" + nomVisiteur + "!");
-		
+		System.out.println("Le gaulois " + nomVisiteur + " a bien emménagé dans le village.");
 	}
-		
 }
 
